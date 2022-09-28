@@ -12,7 +12,7 @@ class Net(nn.Module):
         super(Net, self).__init__()
         self.nins=nins
         self.nout=nout
-        nhid = 2
+        nhid = 5
         self.hidden = nn.Linear(nins, nhid)
         self.out    = nn.Linear(nhid, nout)
 
@@ -33,17 +33,17 @@ class Net(nn.Module):
 
 def train(model, data, target):
     optim = torch.optim.Adam(model.parameters(), lr=0.001)
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.MSELoss()
 
     x=torch.FloatTensor(data)
     y=torch.FloatTensor(target)
-    print(x)
-    print(y)
-    for epoch in range(100):
+    #print(x)
+    #print(y)
+    for epoch in range(500):
         epoch_loss=[]
         optim.zero_grad()
         haty = model(x)
-        print(haty)
+        #print(haty)
         loss = criterion(haty,y)
         epoch_loss.append(loss.item())
         #acc = test(model, data, target)
@@ -55,24 +55,28 @@ def train(model, data, target):
     
 
 def func(x,y):
-    return m.sin(x+y)
+    return m.tan(x+y)
 
 
 def DataGenerator(number):
     data=[]
-    x=np.linspace(-number,number,number)
+    x=np.linspace(-number,number,100)
     for j in range(len(x)):
         data.append([j,j,func(j,j)])
     return data
 
 
 def toytest():
-    model = Net(20,20)
-    data=DataGenerator(20)
+    model = Net(2,1)
+    data=DataGenerator(5)
     #inputdata=[[data[i][0],data[i][1]] for i in range(len(data))]
-    inputdata=[data[i][0] for i in range(len(data))]
 
-    target=[data[i][2] for i in range(len(data))]
+    #input create array of dimensions 20x2
+    inputdata=np.array([[data[i][0],data[i][1]] for i in range(len(data))])
+    #inputdata=[data[i][0] for i in range(len(data))]
+    #print(inputdata)
+
+    target=np.array([[data[i][2]] for i in range(len(data))])
     print(target)
     train(model,inputdata,target)
 
@@ -89,3 +93,4 @@ plt.plot(loss_vals,label="val")
 #plt.ylabel("Loss")
 plt.legend()
 plt.show()
+
