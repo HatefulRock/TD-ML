@@ -1,7 +1,7 @@
 # TD-ML
 
 
-La fonction que nous avons choisie est f(u,v)=cos(x+y)
+La fonction que nous avons choisie est f(u,v)=cos(u+v)
 
 Le reseau qu'on a cherché à impémenter pour résoudre ce problème de régression est un réseau feed-forward a deux entrées , 10 couches chachées et une sortie. La fonction d'activation utilisée est tanh.
 L'optimiseur utilisé est Adam, une fonction qui donne des bons résultats et qui converge rapidement. Le nombre d'epochs est 500.
