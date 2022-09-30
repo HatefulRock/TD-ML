@@ -1,7 +1,6 @@
 import numpy as np
 import torch
 import torch.nn as nn
-import matplotlib.pyplot as plt
 import math as m
 import plotly.graph_objects as go
 
@@ -21,16 +20,8 @@ class Net(nn.Module):
         return x
 
 
-# def test(model, data, target):
-#     x=torch.FloatTensor(data)
-#     y=model(x).detach().numpy()
-#     haty = np.argmax(y,axis=1)
-#     nok=sum([1 for i in range(len(target)) if target[i]==haty[i]])
-#     acc=float(nok)/float(len(target))
-#     return acc
-
 def test(model, data, target):
-    # implement mse accuracy formula
+    # implement mse formula
     x = torch.FloatTensor(data)
     y = model(x).detach().numpy()
     ypred = torch.FloatTensor(target).detach().numpy()
@@ -45,10 +36,13 @@ def train(model, data, target, test_data, test_target):
     loss_tab = []
     loss_test_tab = []
 
-    x = torch.FloatTensor(data)
-    y = torch.FloatTensor(target)
+    oldx = torch.FloatTensor(data)
+    oldy = torch.FloatTensor(target)
+    shuffle = np.arange(len(oldx))
     for epoch in range(1000):
         optim.zero_grad()
+        x = oldx[shuffle]
+        y = oldy[shuffle]
         haty = model(x)
         loss = criterion(haty, y)
         loss_tab.append(loss.item())
@@ -68,9 +62,9 @@ def train(model, data, target, test_data, test_target):
 
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter3d(z=computed_z, x=value_x, y=value_y, mode='markers',
+    fig.add_trace(go.Scatter3d(z=computed_z[:100], x=value_x[:100], y=value_y[:100], mode='markers',
                                name='computed value'))
-    fig.add_trace(go.Scatter3d(z=value_z, x=value_x, y=value_y, mode='markers',
+    fig.add_trace(go.Scatter3d(z=value_z[:100], x=value_x[:100], y=value_y[:100], mode='markers',
                                name='real function value'))
     fig.show()
 
@@ -105,7 +99,7 @@ def DataGenerator(number_samples):
 def toytest():
     model = Net(2, 1)
     training_data, training_target, test_data, test_target = DataGenerator(
-        100)
+        1000)
 
     train(model, training_data, training_target, test_data, test_target)
 
