@@ -1,7 +1,7 @@
 # TD-ML
 
 
-La fonction que nous avons choisie est f(u,v)=cos(u+v)
+La fonction que nous avons choisie est f(u,v)=cos(x+y)
 
 Le reseau qu'on a cherché à impémenter pour résoudre ce problème de régression est un réseau feed-forward a deux entrées , 10 couches chachées et une sortie. La fonction d'activation utilisée est tanh.
 L'optimiseur utilisé est Adam, une fonction qui donne des bons résultats et qui converge rapidement. Le nombre d'epochs est 500.
@@ -20,3 +20,7 @@ Les résultats ne semblent pas etre très concluants comme on peut voir avec les
 ![Training and validation loss](/home/hatefulrock/Pictures/loss.png'  "Training and validation loss")
 ![Training and validation accuracy](/home/hatefulrock/Pictures/acc.png'  "Training and validation accuracy")
 
+On peut remarque que la loss semble est assez élevée et donc que notre modèle n'arrive pas bien a prédire les valeurs target.
+
+## Changements a tester
+Afin d'améliorer le modèle présent, on pourrait changer les hyperparamètres du modéle tels que le learning rate, couches cachées ou fonction d'activation. En effet, on pourrait ajouter plus de couches cachées au modèle et voir si le modèle arive a mieux prédire la focntion f. De meme, on pourrait choisir une fonction d'activation qui est plus adaptée aux fonctions periodiques qui ont des valeurs de faible amplitude.
