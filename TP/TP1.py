@@ -21,6 +21,14 @@ class Net(nn.Module):
         return x
 
 
+# def test(model, data, target):
+#     x=torch.FloatTensor(data)
+#     y=model(x).detach().numpy()
+#     haty = np.argmax(y,axis=1)
+#     nok=sum([1 for i in range(len(target)) if target[i]==haty[i]])
+#     acc=float(nok)/float(len(target))
+#     return acc
+
 def test(model, data, target):
     # implement mse accuracy formula
     x = torch.FloatTensor(data)
