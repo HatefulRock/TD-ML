@@ -102,9 +102,11 @@ dataY = trainy
 data_predict = mod(trainxn).squeeze(0).data.numpy()*dn
 dataY_plot = dataY
 
-
+#data_predict = data_predict
+#print(data_predict)
 dataY_plot = dataY_plot*dn
-
+#print(dataY_plot)
+#length of trainx
 
 
 plt.axvline(x=len(trainx), c='r', linestyle='--')
