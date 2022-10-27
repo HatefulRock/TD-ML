@@ -65,7 +65,7 @@ class Net(nn.Module):
         self.conv1 = nn.Conv1d(in_channels=1, out_channels=1, kernel_size=kernel_size, stride=stride)
         self.layerval=int(((358-(kernel_size-1))/stride))#formula in conv1d doc for output size
         #print(self.layerval)
-        self.mlp = nn.Linear(self.layerval,7)
+        self.mlp = nn.Linear(self.layerval,1)
 
 
     def forward(self, x):
@@ -117,12 +117,25 @@ def train(mod):
     #print("fin",totloss,testloss,file=sys.stderr)
 
 model = Net(1, 1,kernel_size,stride)
+print("nparms",sum(p.numel() for p in model.parameters() if p.requires_grad),file=sys.stderr)
 train(model)
-print(model(trainxn))
+print(model(trainxn)*dn)
 
-#loss plot
-plt.plot(trainloss, label='train loss')
-plt.plot(testloss, label='test loss')
+
+
+# #loss plot
+# plt.plot(trainloss, label='train loss')
+# plt.plot(testloss, label='test loss')
+# plt.legend()
+# plt.show()
+
+#prediction plot
+a=model(trainxn).detach().numpy()[0][0]
+#add a to the end of trainx
+trainx=np.append(trainx,a)
+trainx=trainx*dn
+plt.plot(trainx, label='prediction')
+plt.plot(trainy*dn, label='real')
 plt.legend()
 plt.show()
 

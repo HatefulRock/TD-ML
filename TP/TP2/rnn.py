@@ -7,7 +7,7 @@ import sys
 from torch.autograd import Variable
 
 
-h=10
+h=50
 nepochs=100
 dn=50.
 trainlossRNN=[]
@@ -100,7 +100,7 @@ def train(mod):
     #plot totloss
 
 mod=Mod(h)
-#print("nparms",sum(p.numel() for p in mod.parameters() if p.requires_grad),file=sys.stderr)
+print("nparms",sum(p.numel() for p in mod.parameters() if p.requires_grad),file=sys.stderr)
 train(mod)
 
 mod.eval()

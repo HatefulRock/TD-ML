@@ -1,23 +1,18 @@
 # TD-ML
 
 
-La fonction que nous avons choisie est f(x,y)=cos(2x+y)
+Dans ce TP on compare les performances de deux modèles de réseaux de neurones différents, RNN et CNN. Pour ce faire on compare leurs performances dans la preédiction d'une timeseries de la météo.
 
-Le reseau qu'on a cherché à implémenter pour résoudre ce problème de régression est un réseau feed-forward a deux entrées , 10 couches cachées et une sortie. La fonction d'activation utilisée est tanh.
-L'optimiseur utilisé est Adam, une fonction qui donne des bons résultats et qui converge rapidement. Le nombre d'époques est 1000.
-Pour calculer la loss, on utilise comme métrique la Mean Squared Error qui est une métrique adaptée pour les problèmes de régression. Elles est definie comme etant sqrt(mean((y-ypred)**2)) avec y la valeur qu'on cherche à prédire et ypred la valeur prédite.
+Pour comparer de façon équitable les modèles on va comparer le nombre de paramètres et la loss donnée par le modèle
 
-## Installation
+params rnn: 2701
+params cnn: 361
 
-En plus des bibliothèques habituelles en Machine Learning, nous avons choisi d'utiliser la bibliothèque plotly pour afficher les graphes, ce qui permet de les manipuler (par exemple tourner pour des graphes 3D) puis de les enregistrer en format png très facilement.
+## RNN
+le nombre de paramètres dans le RNN est de 2701.
 
-Pour installer la bibliothèque il faut lancer la commande **pip install plotly**
-
-## Données
-
-Pour créer les données d'entrée du réseau on crée un array et on l'initialise avec des valeurs aléatoirement distribuées dans l'intervalle [-5,5]. Le nombre de valeurs est un paramètre modifiable. Ensuite, on crée les valeurs target comme étant les images par la fonction f des valeurs d'entrée. On fait de même pour les données de test, en ayant une répartition 80% training, 20% test. Ces valeurs la sont donc les valeurs que le réseau va chercher a apprendre et calculer. on choisit d'entraîner nos données sur 1000 points. (ie 800 points d'entrainement et 200 de test)
-
-
+En ce qui concerne la loss, on peut voir dns le graphique suivant:
+![3d function value](https://github.com/HatefulRock/TD-ML/blob/main/images/3d_function_value.png?raw=true  "Comparaison des veleurs calculées et réelles de la fonction")
 
 ## Résultats:
 
