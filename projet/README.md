@@ -16,9 +16,13 @@ A partir des données, j'ai utilisé le module StandardScaler de scikit learn af
 Pour fiare des etudes sur des time series, il est intéressant d'uiliser une architecture de type RNN car ils sont très puissants pour traiter des données séquentielles. En effet, on peut utiliser l'information dans la mémoire pour éffectuer des meilleures prédictions. Cependant, les RNN ont des soucis pour faire face au probleme du vanishing gradient. Ces pour ça que d'autres architectures de type RNN ont etées créees telles que les LSTM( Long Short Term Memory) ou les GRU( Gated Recurrent Unit). Les lSTM et les GRU font usage de gates pour trier les informations qui sont importantes et ainsi ne garder en mémoire uniquement des informations nécessaires aux prédictions futures.
 
 # GRU
+![GRU](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/gru.jpg?raw=true  "GRU")
+
 Le GRU contient deux gates: la reset gate et l'update gate. La reset gate decide si l'inforamtion conetenue dans la cellule precedente est importante ou non. L'update gate quant a elle decide de mettre a jour la cellule actuelle avec l'information actuelle.
 
 # LSTM
+![LSTM](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/lstm.png?raw=true  "LSTM")
+
 En plus de la reset gate et de l'update gate, le LSTM contient aussi une forget gate et une output gate. La forget gate décide la quantité d'information qui est passée d'etat en etat. L'output gate détermine le prochain hidden state en controlant l'information qui arrive vers celle ci.
 
 
@@ -29,20 +33,47 @@ L'optimiseur utilisé est ADAM avec un learning rate de 1e-3. La loss utilisée 
 
 
 ## Analyse des résultats
-J'ai effectué des tests pour analyser les performances des deux modèles et de les comparer. 
-Loss:
+J'ai éffectué des tests pour analyser les performances des deux modèles et de les comparer. 
+
+Loss avec 4 couches cachées:
+![Loss curve with 4 hidden layers](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/loss%204hd.png?raw=true  "Loss curve")
+
+Loss avec 2 couches cachées et hidden state size égal à 50:
+![Loss curve with 2 hidden layers, hidden sate size =50](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/Loss%20hidden%20state%2050.png?raw=true  "Loss curve")
+
+
 
 
 Prédiction:
 
+Prédiction avec 5 couches cachées:
+![Prediction of the network, 5 hidden layers](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/Predicted.png?raw=true  "Prediction")
+
+Prédiction avec 2 couches cachées et hidden state size a 50:
+![Prediction of the network, hidden state size=50](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/Loss%20hidden%20state%2050.png?raw=true  "Prediction")
 
 
 
 Temps de calcul:
 
+Temps pris pour 5 couches cachées:
+![Time taken to train and test networks, 5 hidden layers](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/time_5hid.png?raw=true  "Time taken")
+
+Temps pris pour 4 couches cachées:
+![Time taken to train and test networks, 4 hidden layers](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/time4hd.png?raw=true  "Time taken")
+
+Temps pris pour 3 couches cachées:
+![Time taken to train and test networks, 3 hidden layers](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/time_3hd.png?raw=true  "Time taken")
+
+Temps pris 2 couches cachées et hidden state size égal à 50:
+![Time taken to train and test networks, 2 hidden layers, hidden sate size=50](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/time%2050%20hidden%20state.png?raw=true  "Time taken")
+
+
 
 J'ai aussi crée des fonctions qui permettent de tester les modèles sur d'autres cours pris aleatoirement dans le dossier Stocks. Cette fonction calcule la MSE pour chaque cours et fait une moyenne sur 10 cours différents. Ces fonction me permettent donc d'evaluer les performances des modèles sur d'autres types de données et donc de comparer la robustesse des modèles. Pour cela je sauvegarde les modèles grace a la fonctionnalité torch.save. Ceci me permet donc d'enregistrer les poids du réseau et de pouvoir les réutilser sans avoir à refaire l'entrainement a chaque fois. Cependant, j'ai eu des soucis avec les résultats de ces fonctions car les valeurs prédites par les modèles semblent être constantes et ne suivent pas le cours de l'action.
 
+Mauvaise prédiction:
+![Failed prediction](https://github.com/HatefulRock/TD-ML/blob/main/projet/images/testing_fail.png?raw=true  "Prediction")
 
 ## Conclusion
 
